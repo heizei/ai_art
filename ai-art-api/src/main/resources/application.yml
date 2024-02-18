@@ -1,2 +1,5 @@
 server:
   port: 8085
+tencent:
+  meId: "AKIDd7nTxENPEybAZnARhmnhS5arujQq2ziK"
+  meKey: "a2PacS3rWxFLVaaSXSl187ycGjAX5ZJP"
