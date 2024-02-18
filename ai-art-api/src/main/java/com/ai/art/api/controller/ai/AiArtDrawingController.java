@@ -1,11 +1,11 @@
 package com.ai.art.api.controller.ai;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ai.art.api.convert.drawing.AiDrawingConvert;
 import com.ai.art.api.model.request.drawing.TextToImageReqDTO;
@@ -18,6 +18,7 @@ import com.ai.art.proxy.tencent.ai.drawing.TencentAiDrawingProxy;
  */
 @RestController
 @RequestMapping("/ai")
+@CrossOrigin
 public class AiArtDrawingController {
 
     @Autowired
@@ -26,10 +27,15 @@ public class AiArtDrawingController {
     @PostMapping("/textToImag")
     public AjaxResult textToImag(@RequestBody TextToImageReqDTO reqDTO) {
 
-        // todo 转换json结果
+        System.out.println(reqDTO);
+
         String result = tencentAiDrawingProxy
             .textToImage(AiDrawingConvert.textToImageReqBOConvert(reqDTO));
-        return AjaxResult.success(result);
+
+        JsonObject jsonObject = (JsonObject) new JsonParser().parse(result);
+        String data = jsonObject.get("Response").getAsJsonObject().get("ResultImage").getAsString();
+
+        return AjaxResult.success(data);
     }
 
 }
