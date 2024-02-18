@@ -26,8 +26,8 @@ public class TencentAiDrawingProxy {
     public String textToImage(TextToImageReqBO reqBO) {
 
         try {
-            String secretId = "AKIDd7nTxENPEybAZnARhmnhS5arujQq2ziK";
-            String secretKey = "a2PacS3rWxFLVaaSXSl187ycGjAX5ZJP";
+            String secretId = "aaa";
+            String secretKey = "aaa";
             String token = "";
             String service = "aiart";
             String version = "2022-12-29";
